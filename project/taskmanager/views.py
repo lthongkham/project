@@ -29,4 +29,9 @@ def deconnexion(request):
 def projects(request):
     username = request.user.username
     P = Project.objects.filter(members__username = username)
-    return render(request, 'taskmanager/projects_list.html', locals())
+    return render(request, 'taskmanager/projects.html', locals())
+
+def project(request, id_project):
+    p = Project.objects.all()[id_project]
+    tasks = p.task_set.all()
+    return render(request, 'taskmanager/project.html', locals())

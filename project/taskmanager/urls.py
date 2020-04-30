@@ -5,4 +5,5 @@ urlpatterns = [
     path('connexion', views.connexion, name='connexion'),
     path('deconnexion', views.deconnexion),
     path('projects', views.projects),
+    path('project/<int:id_project>', views.project),
 ]

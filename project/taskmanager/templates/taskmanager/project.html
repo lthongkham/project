@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project {{p.Name}}</title>
+</head>
+<body>
+
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/connexion';">Log Out</button>
+
+<h1>Project {{p.Name}}</h1>
+
+<button onclick="TODO voir projects.html">Ajouter une tache</button>
+
+<table>
+    <th>Task</th>
+    <th>Assignee</th>
+    <th>Start date</th>
+    <th>Due date</th>
+    {% for task in tasks %}
+        <tr>
+            <th><a href="TODO detail d'une tache">{{task.name}}</a></th>
+            <th>{{task.assignee}}</th>
+            <th>{{task.start_date}}</th>
+            <th>{{task.due_date}}</th>
+            <th><button onclick="TODO voir projects.html">Modifier</button></th>
+
+            <br>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
