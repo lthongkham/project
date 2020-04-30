@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/connexion';">Log Out</button>
+
+<h1>Projects</h1>
+
+<p> Welcome {{username}}</p>
+
+{% for project in P %}
+        <tr>
+            <a href="https://lms.isae.fr/mod/page/view.php?id=60007">{{project.Name}}</a>
+            <br>
+        </tr>
+    {% endfor %}
+
+</body>
+</html>

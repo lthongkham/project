@@ -1,10 +1,12 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 from .forms import LoginForm
+from .models import Project
 
 
 def connexion(request):
     form = LoginForm(request.POST or None)
+    message = None
     if form.is_valid():
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
@@ -14,9 +16,17 @@ def connexion(request):
             login(request, user)
 
             # TODO Charger listes de projets
-            #TODO return render(request, 'taskmanager/connexion.html', locals())
+            return projects(request)
+        else:
+            message = "Erreur d'authentification"
 
     return render(request, 'taskmanager/connexion.html', locals())
 
 def deconnexion(request):
-    return
+    logout(request)
+    return redirect(connexion)
+
+def projects(request):
+    username = request.user.username
+    P = Project.objects.filter(members__username = username)
+    return render(request, 'taskmanager/projects_list.html', locals())
