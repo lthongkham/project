@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'newtask' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Créer">
+</form>

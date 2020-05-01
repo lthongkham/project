@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import LoginForm
-from .models import Project
+from .forms import LoginForm, TaskForm
+from .models import Project, Task
 
 
 def connexion(request):
@@ -32,6 +32,20 @@ def projects(request):
     return render(request, 'taskmanager/projects.html', locals())
 
 def project(request, id_project):
-    p = Project.objects.all()[id_project]
+    p = Project.objects.all()[id_project-1]
     tasks = p.task_set.all()
     return render(request, 'taskmanager/project.html', locals())
+
+def task(request, id_task):
+    task = Task.objects.all()[id_task-1]
+    journals = task.journal_set.all()
+    return render(request, 'taskmanager/task.html', locals())
+
+def newtask(request):
+    form = TaskForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        id_task = len(Task.objects.all())
+        return task(request, id_task)
+
+    return render(request, 'taskmanager/newtask.html', locals())

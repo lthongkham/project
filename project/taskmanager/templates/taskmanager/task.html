@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+</head>
+<body>
+
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
+
+<h1>{{task.project.Name}}</h1>
+
+<h2>{{task.name}}</h2>
+
+<p>{{task.description}}
+
+<table>
+    <tr>
+        <th><strong>Assignee</strong></th>
+        <th>{{task.assignee}}</th>
+    </tr>
+    <tr>
+        <th><strong>Start date</strong></th>
+        <th>{{task.start_date}}</th>
+    </tr>
+    <tr>
+        <th><strong>Due date</strong></th>
+        <th>{{task.due_date}}</th>
+    </tr>
+    <tr>
+        <th><strong>Status</strong></th>
+        <th>{{task.status}}</th>
+    </tr>
+</table>
+
+
+<p>History</p>
+<button onclick="TODO voir projects.html">Ajouter une note</button>
+<table>
+    {% for journal in journals %}
+        <tr>
+            <th>{{journal.author}}</th>
+            <th>{{journal.date}}</th>
+            <th>{{journal.entry}}</th>
+            <br>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

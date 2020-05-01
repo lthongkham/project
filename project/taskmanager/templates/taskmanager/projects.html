@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/connexion';">Log Out</button>
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
 
 <h1>Projects</h1>
 
@@ -14,7 +14,7 @@
 
 {% for project in P %}
         <tr>
-            <a href="https://lms.isae.fr/mod/page/view.php?id=60007">{{project.Name}}</a>
+            <a href="http://127.0.0.1:8000/taskmanager/project/{{project.id}}">{{project.Name}}</a>
             <br>
         </tr>
     {% endfor %}

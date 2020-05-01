@@ -26,3 +26,9 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+class Journal(models.Model):
+    date = models.DateField()
+    entry = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
