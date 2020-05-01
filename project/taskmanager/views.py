@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LoginForm, TaskForm
 from .models import Project, Task
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def connexion(request):
@@ -28,24 +29,39 @@ def deconnexion(request):
 
 def projects(request):
     username = request.user.username
+    print("OKOZAJDAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
     P = Project.objects.filter(members__username = username)
     return render(request, 'taskmanager/projects.html', locals())
 
 def project(request, id_project):
-    p = Project.objects.all()[id_project-1]
+    p = Project.objects.filter(id=id_project)[0]
     tasks = p.task_set.all()
     return render(request, 'taskmanager/project.html', locals())
 
 def task(request, id_task):
-    task = Task.objects.all()[id_task-1]
-    journals = task.journal_set.all()
+    print(id_task)
+    print(Task.objects.filter(id=id_task))
+    t = Task.objects.filter(id=id_task)[0]
+    journals = t.journal_set.all()
     return render(request, 'taskmanager/task.html', locals())
 
 def newtask(request):
     form = TaskForm(request.POST or None)
     if form.is_valid():
         form.save()
-        id_task = len(Task.objects.all())
+        newtask = Task.objects.all()[len(Task.objects.all())-1]
+        print(newtask)
+        id_task = newtask.id
+        print("NEW ID NDZAIDJZAIOADZ "+str(id_task))
         return task(request, id_task)
 
     return render(request, 'taskmanager/newtask.html', locals())
+
+def edittask(request, id_task):
+    t = Task.objects.filter(id=id_task)[0]
+    form = TaskForm(request.POST or None, instance = t)
+    if form.is_valid():
+        form.save()
+        return task(request, t.id)
+
+    return render(request, 'taskmanager/edittask.html', locals())

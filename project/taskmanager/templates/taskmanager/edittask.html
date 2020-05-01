@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'edittask' t.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Modifier">
+</form>

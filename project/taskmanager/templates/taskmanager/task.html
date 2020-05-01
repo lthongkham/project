@@ -8,28 +8,30 @@
 
 <button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
 
-<h1>{{task.project.Name}}</h1>
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/project/{{t.project.id}}';"><-{{t.project.Name}}</button>
 
-<h2>{{task.name}}</h2>
+<h1>{{t.project.Name}}</h1>
 
-<p>{{task.description}}
+<h2>{{t.name}}</h2>
+
+<p>{{t.description}}</p>
 
 <table>
     <tr>
         <th><strong>Assignee</strong></th>
-        <th>{{task.assignee}}</th>
+        <th>{{t.assignee}}</th>
     </tr>
     <tr>
         <th><strong>Start date</strong></th>
-        <th>{{task.start_date}}</th>
+        <th>{{t.start_date}}</th>
     </tr>
     <tr>
         <th><strong>Due date</strong></th>
-        <th>{{task.due_date}}</th>
+        <th>{{t.due_date}}</th>
     </tr>
     <tr>
         <th><strong>Status</strong></th>
-        <th>{{task.status}}</th>
+        <th>{{t.status}}</th>
     </tr>
 </table>
 

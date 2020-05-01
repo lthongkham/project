@@ -8,6 +8,8 @@
 
 <button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
 
+<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/projects';"><-Projects</button>
+
 <h1>Project {{p.Name}}</h1>
 
 <button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/newtask';">Ajouter une tache</button>
@@ -23,7 +25,8 @@
             <th>{{task.assignee}}</th>
             <th>{{task.start_date}}</th>
             <th>{{task.due_date}}</th>
-            <th><button onclick="TODO voir projects.html">Modifier</button></th>
+            <th>{{task.id}}</th>
+            <th><button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/edittask/{{task.id}}';">Modifier</button></th>
 
             <br>
         </tr>
