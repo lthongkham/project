@@ -9,4 +9,5 @@ urlpatterns = [
     path('task/<int:id_task>', views.task),
     path('newtask', views.newtask, name='newtask'),
     path('edittask/<int:id_task>', views.edittask, name='edittask'),
+    path('newjournal/', views.newjournal, name='newjournal'),
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import LoginForm, TaskForm
-from .models import Project, Task
+from .forms import LoginForm, TaskForm, JournalForm
+from .models import Project, Task, Journal
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
@@ -29,7 +29,6 @@ def deconnexion(request):
 
 def projects(request):
     username = request.user.username
-    print("OKOZAJDAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
     P = Project.objects.filter(members__username = username)
     return render(request, 'taskmanager/projects.html', locals())
 
@@ -39,20 +38,17 @@ def project(request, id_project):
     return render(request, 'taskmanager/project.html', locals())
 
 def task(request, id_task):
-    print(id_task)
-    print(Task.objects.filter(id=id_task))
     t = Task.objects.filter(id=id_task)[0]
     journals = t.journal_set.all()
     return render(request, 'taskmanager/task.html', locals())
 
 def newtask(request):
     form = TaskForm(request.POST or None)
+    #form = TaskForm(request.POST or None, initial={'project': Project.objects.filter(id=id_project)[0]})
     if form.is_valid():
         form.save()
         newtask = Task.objects.all()[len(Task.objects.all())-1]
-        print(newtask)
         id_task = newtask.id
-        print("NEW ID NDZAIDJZAIOADZ "+str(id_task))
         return task(request, id_task)
 
     return render(request, 'taskmanager/newtask.html', locals())
@@ -65,3 +61,14 @@ def edittask(request, id_task):
         return task(request, t.id)
 
     return render(request, 'taskmanager/edittask.html', locals())
+
+def newjournal(request):
+    form = JournalForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        newjournal = Journal.objects.all()[len(Journal.objects.all())-1]
+        id_task = newjournal.task.id
+        print(id_task)
+        return task(request, id_task)
+
+    return render(request, 'taskmanager/newjournal.html', locals())
