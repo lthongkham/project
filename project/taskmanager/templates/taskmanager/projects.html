@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Projects</title>
-</head>
-<body>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'taskmanager/style.css' %}" />
+        <title>Projects</title>
+    </head>
 
-<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
+    <body>
 
-<h1>Projects</h1>
+        <div class="col-3 col-s-3 menu">
+            <button type="button" class="btn btn-success btn-lg" onclick=" window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
+        </div>
 
-<p> Welcome {{username}}</p>
+        <div class="header">
+            <h1>Projects</h1>
+        </div>
 
-{% for project in P %}
-        <tr>
-            <a href="http://127.0.0.1:8000/taskmanager/project/{{project.id}}">{{project.Name}}</a>
-            <br>
-        </tr>
-    {% endfor %}
+        <div class="row">
+            <div class="col-3 col-s-3 menu">
+                <ul>
+                    {% for project in P %}
+                        <li class="project">
+                            <a href="http://127.0.0.1:8000/taskmanager/project/{{project.id}}">{{project.Name}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-</body>
+            <div class="col-6 col-s-9">
+                <h1>Bienvenue {{username}}</h1>
+                <p>Vous avez {{l}} projets en cours.</p>
+            </div>
+        </div>
+    </body>
 </html>

@@ -30,6 +30,7 @@ def deconnexion(request):
 def projects(request):
     username = request.user.username
     P = Project.objects.filter(members__username = username)
+    l = len(P)
     return render(request, 'taskmanager/projects.html', locals())
 
 def project(request, id_project):

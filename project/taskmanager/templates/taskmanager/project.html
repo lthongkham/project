@@ -1,37 +1,54 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project {{p.Name}}</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'taskmanager/style.css' %}" />
+        <title>Project {{p.Name}}</title>
+    </head>
 
-<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
+    <body>
+        <div class="col-3 col-s-3 menu">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success btn-lg" onclick=" window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/projects';">Projects</button>
+            </div>
+        </div>
 
-<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/projects';"><-Projects</button>
+        <div class="header">
+            <h1>{{p.Name}}</h1>
+        </div>
+        <br>
 
-<h1>Project {{p.Name}}</h1>
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/newtask';">Ajouter une tache</button>
+        </div>
 
-<button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/newtask/{{p.id}}';">Ajouter une tache</button>
+        <table>
+            <thead>
+                <td>Tache</td>
+                <td>Assignee</td>
+                <td>Date de debut</td>
+                <td>Date limite</td>
+            </thead>
 
-<table>
-    <th>Task</th>
-    <th>Assignee</th>
-    <th>Start date</th>
-    <th>Due date</th>
-    {% for task in tasks %}
-        <tr>
-            <th><a href="http://127.0.0.1:8000/taskmanager/task/{{task.id}}">{{task.name}}</a></th>
-            <th>{{task.assignee}}</th>
-            <th>{{task.start_date}}</th>
-            <th>{{task.due_date}}</th>
-            <th>{{task.id}}</th>
-            <th><button onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/edittask/{{task.id}}';">Modifier</button></th>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/taskmanager/task/{{task.id}}">{{task.name}}</a></td>
+                        <td>{{task.assignee}}</td>
+                        <td>{{task.start_date}}</td>
+                        <td>{{task.due_date}}</td>
+                        <td><button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/edittask/{{task.id}}';">Modifier</button></td>
 
-            <br>
-        </tr>
-    {% endfor %}
-</table>
+                        <br>
+                    </tr>
+                {% endfor %}
+            </tbody>
 
-</body>
+        </table>
+
+    </body>
 </html>
