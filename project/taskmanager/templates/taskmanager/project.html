@@ -6,10 +6,12 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'taskmanager/style.css' %}" />
-        <title>Project {{p.Name}}</title>
+        <title>{{p.name}}</title>
     </head>
 
     <body>
+
+        {# Groupe de boutons pour se deconnecter ou retourner à la liste de projets #}
         <div class="col-3 col-s-3 menu">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-success btn-lg" onclick=" window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
@@ -18,15 +20,18 @@
         </div>
 
         <div class="header">
-            <h1>{{p.Name}}</h1>
+            <h1>{{p.name}}</h1>
         </div>
         <br>
 
+        {# Bouton ajouter une nouvelle tache #}
         <div class="btn-group">
             <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/newtask';">Ajouter une tache</button>
         </div>
 
+        {# Liste des tache avec leurs details #}
         <table>
+            {# Intitules des details #}
             <thead>
                 <td>Tache</td>
                 <td>Assignee</td>
@@ -34,13 +39,23 @@
                 <td>Date limite</td>
             </thead>
 
+            {# Details d'une tache #}
             <tbody>
                 {% for task in tasks %}
                     <tr>
                         <td><a href="http://127.0.0.1:8000/taskmanager/task/{{task.id}}">{{task.name}}</a></td>
-                        <td>{{task.assignee}}</td>
+
+                        {# Si la tache est assignee a l'utilisateur, son nom est affiche en gras #}
+                        {% if task.assignee == request.user %}
+                            <td><strong>{{task.assignee}}</strong></td>
+                        {% else %}
+                            <td>{{task.assignee}}</td>
+                        {% endif %}
+
                         <td>{{task.start_date}}</td>
                         <td>{{task.due_date}}</td>
+
+                        {# Bouton pour modifier la tache #}
                         <td><button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/edittask/{{task.id}}';">Modifier</button></td>
 
                         <br>

@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'taskmanager/style.css' %}" />
+<title>Login</title>
 
 <div class="header">
     <h1>Project Manager</h1>
@@ -9,10 +10,12 @@
 
 <br>
 
+{# Renvoi un message d'erreur si l'authentification echoue #}
 {% if message != None %}
     <p>{{message}}</p>
 {% endif %}
 
+{# Formulaire pour se connecter #}
 <form method="post" action="{% url 'connexion' %}">
     {% csrf_token %}
     {{ form.as_p }}

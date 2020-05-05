@@ -11,6 +11,7 @@
 
     <body>
 
+        {# Bouton de deconnexion #}
         <div class="col-3 col-s-3 menu">
             <button type="button" class="btn btn-success btn-lg" onclick=" window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
         </div>
@@ -20,16 +21,19 @@
         </div>
 
         <div class="row">
+
+            {# Liste des projets de l'utilisateur #}
             <div class="col-3 col-s-3 menu">
                 <ul>
                     {% for project in P %}
                         <li class="project">
-                            <a href="http://127.0.0.1:8000/taskmanager/project/{{project.id}}">{{project.Name}}</a>
+                            <a href="http://127.0.0.1:8000/taskmanager/project/{{project.id}}">{{project.name}}</a>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
 
+            {# Message d'informations #}
             <div class="col-6 col-s-9">
                 <h1>Bienvenue {{username}}</h1>
                 <p>Vous avez {{l}} projets en cours.</p>

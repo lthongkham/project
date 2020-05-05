@@ -1,19 +1,22 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+# Classe de projets
 class Project(models.Model):
-    Name = models.CharField(max_length=120)
+    name = models.CharField(max_length=120)
     members = models.ManyToManyField(User, related_name="members")
 
     def __str__(self):
-        return self.Name
+        return self.name
 
+# Classe de status
 class Status(models.Model):
     name = models.CharField(max_length=120)
 
     def __str__(self):
         return self.name
 
+# Classe de tache
 class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
@@ -27,6 +30,7 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
+# Classe de journal
 class Journal(models.Model):
     date = models.DateField()
     entry = models.TextField()

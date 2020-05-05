@@ -6,16 +6,16 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'taskmanager/style.css' %}" />
-
-        <title>Projects</title>
+        <title>{{t.name}}</title>
     </head>
 
     <body>
 
+        {# Groupe de boutons pour se deconnecter ou retourner à la liste des taches #}
         <div class="col-3 col-s-3 menu">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-success btn-lg" onclick=" window.location.href = 'http://127.0.0.1:8000/taskmanager/deconnexion';">Log Out</button>
-                    <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/project/{{t.project.id}}';">{{t.project.Name}}</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/project/{{t.project.id}}';">{{t.project.name}}</button>
                 </div>
             </div>
 
@@ -25,6 +25,7 @@
 
         <div class="row">
 
+            {# Details de la tache #}
             <div class="col-4 col-s-4 menu">
                 <h2>{{t.description}}</h2>
 
@@ -49,23 +50,22 @@
             </div>
 
 
+            {# Journal des notes #}
             <div class="col-6 col-s-9">
-                <h2>History</h2>
+                <h2>Historique</h2>
 
-                <div class="col-1 col-s-1 menu">
                     <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href = 'http://127.0.0.1:8000/taskmanager/newjournal/';">Ajouter une note</button>
-                </div>
 
-                <table>
-                    {% for journal in journals %}
-                        <tr>
-                            <td><strong>{{journal.author}}</strong></td>
-                            <td>{{journal.date}}</td>
-                            <td>{{journal.entry}}</td>
-                            <br>
-                        </tr>
-                    {% endfor %}
-                </table>
+                    <table>
+                        {% for journal in journals %}
+                            <tr>
+                                <td><strong>{{journal.author}}</strong></td>
+                                <td>{{journal.date}}</td>
+                                <td>{{journal.entry}}</td>
+                                <br>
+                            </tr>
+                        {% endfor %}
+                    </table>
             </div>
         </div>
     </body>
